@@ -48,7 +48,7 @@ const english = {
     title:'Resume',
     lang_t:'ENG',
     aboutme_t:'About Me',
-    aboutme_b:`My name is Yarin Shitrit, 21 years old, from Rishon Lezion.<br>I serve as a Network Technician at a reconnaissance base, responsible for maintaining and operating the network infrastructure. Additionally, I develop applications and websites for unit needs.<br>I am a fast learner with experience in developing apps and websites across multiple technologies. I am friendly, team-oriented, and skilled in interpersonal communication.`,
+    aboutme_b:`My name is Yarin Shitrit, 21 years old, from Rishon Lezion.<br>I serve as a Network Technician at base 'Sayarim', responsible for maintaining and operating the network infrastructure. Additionally, I develop applications and websites for unit needs.<br>I am a fast learner with experience in developing apps and websites across multiple technologies. I am friendly, team-oriented, and skilled in interpersonal communication.`,
     education_t:'Education',
     education_b:`<li>High school diploma with 10 units in Computer Science, 5 units in English, and 5 units in Chemistry</li><li>13th grade studies in Software Engineering, Software Technician Diploma</li><li>Completed Network Technician course in the army and served in this role</li><li>Developed applications and websites as part of military service alongside network technician duties</li>`,
     experience_t:'Work Experience',
