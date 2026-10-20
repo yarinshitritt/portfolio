@@ -388,3 +388,101 @@ body.hebrew #title {
         grid-template-columns: 1fr 1fr;
     }
 }
+/* Header actions (language + PDF) */
+#headerActions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+#pdfButton {
+    cursor: pointer;
+    background: var(--blue-mid);
+    border: 1px solid var(--blue-light);
+    border-radius: var(--radius-md);
+    padding: 0.35rem 0.75rem;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+#pdfButton:hover {
+    background: var(--blue-light);
+}
+
+/* Contact items: icon + visible text */
+#contact > div {
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+}
+
+#contact .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: #212529;
+    font-weight: 500;
+    direction: ltr;
+}
+#contact .contact-item:hover {
+    color: var(--blue-mid);
+    text-decoration: none;
+}
+
+/* Print / PDF */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    body {
+        background: #fff;
+        font-size: 11pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    header {
+        position: static;
+        box-shadow: none;
+    }
+
+    #headerActions,
+    #title,
+    hr {
+        display: none;
+    }
+
+    #about,
+    #education,
+    #experience,
+    #skills,
+    #technologies,
+    #contact {
+        box-shadow: none;
+        margin-bottom: var(--sp-3);
+    }
+
+    #education ul li,
+    #experience ul li,
+    #skills ul li,
+    #technologies ul li {
+        break-inside: avoid;
+    }
+
+    #about h2,
+    #education h2,
+    #experience h2,
+    #skills h2,
+    #technologies h2,
+    #contact h2 {
+        break-after: avoid;
+        padding-top: var(--sp-4);
+    }
+
+    #contact a img {
+        display: none;
+    }
+}
