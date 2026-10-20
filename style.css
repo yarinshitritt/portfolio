@@ -391,6 +391,7 @@ body.hebrew #title {
 /* Header actions (phone + PDF) */
 #headerActions {
     display: flex;
+    direction: ltr;
     align-items: center;
     gap: var(--sp-2);
 }
