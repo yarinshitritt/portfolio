@@ -31,7 +31,7 @@ const hebrew = {
     name:'ירין שטרית',
     title: 'קורות חיים',
     lang_t:'עבר',
-    pdf_t:'📄 הורדה כ-PDF',
+    pdf_t:'הורדה כ-PDF',
     aboutme_t:'על עצמי',
     aboutme_b:`שמי ירין שטרית, יליד 2005, מראשון לציון.<br>משרת כטכנאי רשתות במחלקת מחשוב ותשתיות בבהל״ג, ובמקביל לתפקידי יזמתי ופיתחתי מערכות עבור החטיבה.<br>בעל ניסיון בהובלת פרויקט מקצה לקצה – מאפיון הצורך מול גורמי פיקוד ומקצוע ועד ליישום ולתחזוקה שוטפת. לומד מהר ובאופן עצמאי, אחראי ובעל יכולת עבודה בצוות.`,
     education_t:'השכלה',
@@ -49,7 +49,7 @@ const english = {
     name:'Yarin Shitrit',
     title:'Resume',
     lang_t:'ENG',
-    pdf_t:'📄 Download PDF',
+    pdf_t:'Download PDF',
     aboutme_t:'About Me',
     aboutme_b:`My name is Yarin Shitrit, born in 2005, from Rishon LeZion.<br>I serve as a Network Technician in the IT & Infrastructure department of the "Bahalag" base. Alongside my role, I initiated and developed systems for the brigade.<br>Experienced in leading projects end to end – from defining requirements with commanders and professionals, through development, to deployment and ongoing maintenance. A fast, independent learner, responsible and team-oriented.`,
     education_t:'Education',
@@ -68,7 +68,8 @@ function fillHTML(language){
     title.innerText = language.title;
     nameTag.innerText = language.name;
     langButtonText.innerText = language.lang_t;
-    pdfButton.innerText = language.pdf_t;
+    pdfButton.title = language.pdf_t;
+    pdfButton.setAttribute('aria-label', language.pdf_t);
     document.title = language.id === 'hebrew' ? 'ירין שטרית - קורות חיים' : 'Yarin Shitrit - Resume';
     aboutTitle.innerText = language.aboutme_t;
     aboutBody.innerHTML = language.aboutme_b;

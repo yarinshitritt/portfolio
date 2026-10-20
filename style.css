@@ -388,7 +388,7 @@ body.hebrew #title {
         grid-template-columns: 1fr 1fr;
     }
 }
-/* Header actions (language + PDF) */
+/* Header actions (phone + PDF) */
 #headerActions {
     display: flex;
     align-items: center;
@@ -397,18 +397,16 @@ body.hebrew #title {
 
 #pdfButton {
     cursor: pointer;
-    background: var(--blue-mid);
-    border: 1px solid var(--blue-light);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
     border-radius: var(--radius-md);
-    padding: 0.35rem 0.75rem;
-    color: #fff;
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 0.2rem 0.45rem;
+    font-size: 1.1rem;
+    line-height: 1;
     transition: background 0.2s;
 }
 #pdfButton:hover {
-    background: var(--blue-light);
+    background: rgba(255,255,255,0.22);
 }
 
 /* Contact items: icon + visible text */
@@ -449,7 +447,8 @@ body.hebrew #title {
         box-shadow: none;
     }
 
-    #headerActions,
+    #langButton,
+    #pdfButton,
     #title,
     hr {
         display: none;
