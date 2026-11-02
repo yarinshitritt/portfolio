@@ -105,9 +105,10 @@ body > hr {
 }
 
 header {
-    display: flex;
+    /* שלוש עמודות: צד, כפתור שפה במרכז בדיוק, צד - כך שהכפתור לא זז כשרוחב השם/הטלפון משתנה בין השפות */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
     padding: 0.75rem 1.25rem;
     background: linear-gradient(90deg, var(--header-start), var(--header-end));
     box-shadow: var(--shadow-md);
@@ -125,7 +126,10 @@ header {
     white-space: nowrap;
 }
 
+#name { justify-self: start; }
+
 #phone {
+    justify-self: end;
     font-size: 1.1rem;
     color: rgba(255,255,255,0.85);
     white-space: nowrap;
@@ -134,6 +138,8 @@ header {
 #langButton {
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-width: 4rem; /* רוחב קבוע - הכפתור לא משנה גודל כשהטקסט מתחלף בין עברית לאנגלית */
     gap: var(--sp-2);
     cursor: pointer;
     background: rgba(255,255,255,0.12);
@@ -339,7 +345,6 @@ body.hebrew #title {
 
 @media (max-width: 768px) {
     header {
-        flex-wrap: wrap;
         gap: var(--sp-2);
     }
 
@@ -384,6 +389,9 @@ body.hebrew #title {
 }
 
 @media (max-width: 480px) {
+    #name  { font-size: 1rem; }
+    #phone { font-size: 0.85rem; }
+    #langButton { min-width: 3.4rem; padding: 0.3rem 0.5rem; }
     #technologies ul {
         grid-template-columns: 1fr 1fr;
     }
