@@ -1,83 +1,601 @@
 <!DOCTYPE html>
-<html>
+<html lang="he">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <title>Yarin Shitrit's resume</title>
+    <title>ירין שטרית - קורות חיים</title>
+    <style>
+        :root {
+            --bg-page:      #f4f6fc;
+            --bg-card:      #ffffff;
+            --bg-soft:      #f0f4ff;
+            --bg-tag:       #e3ebf8;
+            --text:         #1f2937;
+            --text-muted:   #5b6475;
+            --border:       #e2e8f0;
+
+            --blue-light:   #3b82f6;
+            --blue-mid:     #2563eb;
+            --blue-dark:    #1e40af;
+
+            --gold-bg:      #fef3c7;
+            --gold-text:    #92400e;
+            --gold-border:  #fcd34d;
+
+            --header-start: #1e2a38;
+            --header-end:   #2b3a50;
+
+            --sp-1: 0.25rem;
+            --sp-2: 0.5rem;
+            --sp-3: 0.75rem;
+            --sp-4: 1rem;
+            --sp-5: 1.5rem;
+            --sp-6: 2rem;
+
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 2px 8px rgba(0,0,0,0.12);
+
+            --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-page);
+            font-family: var(--font-base);
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        a { color: var(--blue-mid); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        img { max-width: 100%; vertical-align: middle; }
+        bdi { unicode-bidi: isolate; }
+
+        body.hebrew  { direction: rtl; text-align: right; }
+        body.english { direction: ltr; text-align: left; }
+
+        /* ---------- Header ---------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--sp-4);
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(90deg, var(--header-start), var(--header-end));
+            box-shadow: var(--shadow-md);
+            color: #fff;
+        }
+
+        #identity { display: flex; flex-direction: column; min-width: 0; }
+
+        #name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        #role {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+        }
+
+        #langButton,
+        #pdfButton {
+            cursor: pointer;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-family: inherit;
+            font-weight: 600;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        #langButton:hover,
+        #pdfButton:hover { background: rgba(255,255,255,0.22); }
+
+        #langButton { padding: 0.35rem 0.75rem; font-size: 0.9rem; }
+        #pdfButton  { padding: 0.2rem 0.45rem; font-size: 1.1rem; line-height: 1; }
+
+        #headerActions {
+            display: flex;
+            direction: ltr;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        #phone {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.85);
+            white-space: nowrap;
+        }
+
+        /* ---------- Layout ---------- */
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: var(--sp-5) var(--sp-4) var(--sp-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-4);
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--sp-5);
+        }
+
+        section h2 {
+            margin: 0 0 var(--sp-4);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--blue-mid);
+        }
+
+        /* Work experience is the key section - give it more weight */
+        #experience {
+            border-inline-start: 5px solid var(--blue-mid);
+        }
+        #experience h2 { font-size: 1.45rem; }
+
+        #about p { margin: 0; line-height: 1.75; }
+
+        /* ---------- Education ---------- */
+        #education li {
+            position: relative;
+            padding-inline-start: var(--sp-4);
+            margin-bottom: var(--sp-2);
+        }
+        #education li::before {
+            content: '';
+            position: absolute;
+            inset-inline-start: 0;
+            top: 0.65em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue-light);
+        }
+
+        /* ---------- Experience ---------- */
+        .job {
+            padding: var(--sp-4) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .job:first-child { padding-top: 0; }
+        .job:last-child  { padding-bottom: 0; border-bottom: none; }
+
+        .job-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        .job-title {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .job-meta {
+            margin: 0.1rem 0 var(--sp-2);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .job-desc { margin: 0 0 var(--sp-3); }
+
+        .award {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-1);
+            padding: 0.15rem 0.6rem;
+            border: 1px solid var(--gold-border);
+            border-radius: 999px;
+            background: var(--gold-bg);
+            color: var(--gold-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sp-2);
+            direction: ltr;
+        }
+        body.hebrew .tags { justify-content: flex-end; }
+
+        .tag {
+            padding: 0.15rem 0.6rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-tag);
+            color: var(--blue-dark);
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ---------- Skills (two columns) ---------- */
+        #skills ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-3);
+        }
+        #skills li {
+            background: var(--bg-soft);
+            border-radius: var(--radius-md);
+            padding: var(--sp-3) var(--sp-4);
+        }
+        #skills li strong {
+            display: block;
+            color: var(--blue-dark);
+            margin-bottom: 0.15rem;
+        }
+        #skills li span {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* ---------- Technologies ---------- */
+        #technologies ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sp-2);
+            direction: ltr;
+        }
+        body.hebrew #technologies ul { justify-content: flex-end; }
+        #technologies li {
+            padding: 0.4rem 0.85rem;
+            border: 1px solid #c7d2fe;
+            border-radius: var(--radius-md);
+            background: var(--bg-soft);
+            color: var(--blue-mid);
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        /* ---------- Contact ---------- */
+        #contact { text-align: center; }
+        #contact .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--sp-5);
+        }
+        #contact a {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+            color: var(--text);
+            font-weight: 500;
+            direction: ltr;
+        }
+        #contact a:hover { color: var(--blue-mid); text-decoration: none; }
+
+        /* ---------- Mobile ---------- */
+        @media (max-width: 640px) {
+            header { flex-wrap: wrap; padding: 0.6rem var(--sp-4); }
+            #name  { font-size: 1.2rem; }
+            #role  { font-size: 0.8rem; }
+            #phone { font-size: 0.95rem; }
+            main   { padding: var(--sp-4) var(--sp-4) var(--sp-5); }
+            section { padding: var(--sp-4); }
+            #skills ul { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- Print / PDF ---------- */
+        @media print {
+            @page { size: A4; margin: 12mm; }
+
+            body {
+                background: #fff;
+                font-size: 10.5pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            header { position: static; box-shadow: none; }
+            #langButton, #pdfButton { display: none; }
+            main { padding: var(--sp-3) 0 0; gap: var(--sp-3); }
+            section { box-shadow: none; padding: var(--sp-4); }
+            section h2 { break-after: avoid; }
+            .job, #skills li, #technologies li { break-inside: avoid; }
+            #contact img { display: none; }
+        }
+    </style>
 </head>
-<body class="english">
-    <!-- Header -->
+<body class="hebrew">
     <header>
-        <span id="name"></span>
-        <div id="langButton"><span></span></div>
+        <div id="identity">
+            <span id="name"></span>
+            <span id="role"></span>
+        </div>
+        <button id="langButton" type="button"></button>
         <div id="headerActions">
-            <span id="phone" style="direction: rtl !important;">📞 054-3384656</span>
+            <span id="phone">📞 054-3384656</span>
             <button id="pdfButton" type="button">📄</button>
         </div>
     </header>
 
+    <main>
+        <section id="about">
+            <h2></h2>
+            <p></p>
+        </section>
 
-    <!-- Title -->
-    <div id="title">
-        <h1>Resume</h1>
-    </div>
+        <section id="experience">
+            <h2></h2>
+            <div class="jobs"></div>
+        </section>
 
-    <hr>
+        <section id="education">
+            <h2></h2>
+            <ul></ul>
+        </section>
 
-    <!-- About me -->
-    <div id="about">
-        <h2></h2>
-        <p></p>
-    </div>
+        <section id="skills">
+            <h2></h2>
+            <ul></ul>
+        </section>
 
-    <hr>
+        <section id="technologies">
+            <h2></h2>
+            <ul></ul>
+        </section>
 
-    <!-- Education -->
-    <div id="education">
-        <h2></h2>
-        <ul></ul>
-    </div>
+        <section id="contact">
+            <h2></h2>
+            <div class="links">
+                <a href="https://github.com/yarinshitritt" target="_blank" rel="noopener">
+                    <img src="Octicons-mark-github.svg.png" alt="GitHub" width="32">
+                    <span>github.com/yarinshitritt</span>
+                </a>
+                <a href="mailto:yarinshitrit908@gmail.com">
+                    <img src="pngimg.com - gmail_logo_PNG12.png" alt="Gmail" width="36">
+                    <span>yarinshitrit908@gmail.com</span>
+                </a>
+            </div>
+        </section>
+    </main>
 
-    <hr>
+    <script>
+        // PAGE CONTENT
+        const TECH = ['JavaScript', 'HTML', 'CSS', 'Python', 'Java', 'C#', 'C', 'SQL', 'REST APIs',
+            'Cloudflare Workers', 'AI Chatbot Development', 'SharePoint', 'Git & GitHub',
+            'Android Studio', 'Firebase', 'Networking (TCP/IP)'];
 
-    <!-- Work Experience -->
-    <div id="experience">
-        <h2></h2>
-        <ul></ul>
-    </div>
+        const hebrew = {
+            id: 'hebrew',
+            name: 'ירין שטרית',
+            role: 'מפתח Web ומערכות · טכנאי רשתות',
+            docTitle: 'ירין שטרית - קורות חיים',
+            lang_t: 'עבר',
+            pdf_t: 'הורדה כ-PDF',
+            about_t: 'על עצמי',
+            about_b: [
+                'שמי ירין שטרית, יליד 2005, מראשון לציון.',
+                'משרת כטכנאי רשתות במחלקת מחשוב ותשתיות בבהל״ג, ובמקביל לתפקידי יזמתי ופיתחתי מערכות עבור החטיבה.',
+                'בעל ניסיון בהובלת פרויקט מקצה לקצה – מאפיון הצורך מול גורמי פיקוד ומקצוע ועד ליישום ולתחזוקה שוטפת. לומד מהר ובאופן עצמאי, אחראי ובעל יכולת עבודה בצוות.'
+            ],
+            experience_t: 'ניסיון תעסוקתי',
+            jobs: [
+                {
+                    title: '״פקאדקס״ – מערכת לניהול פקא״ות יחידתיות',
+                    award: '🏆 הצטיינות מח״ט',
+                    desc: 'יזמתי, אפיינתי ופיתחתי באופן עצמאי מערכת Web שנמצאת בשימוש יומיומי בחטיבה ובגדודים הכפופים לה. המערכת מנהלת את הציוד והלו״ז השבועי של מדורי היחידה וכוללת סנכרון בזמן אמת בין משתמשים, תהליך טיוטה והפצה, ניהול משתמשים והרשאות והתחברות אוטומטית מבוססת זהות ארגונית.',
+                    tags: ['JavaScript', 'HTML', 'CSS', 'SharePoint', 'REST API']
+                },
+                {
+                    title: 'צ\'אט AI להכשרות חיל הגנת הגבולות',
+                    desc: 'מערכת צ\'אט שמנגישה ללוחמים ולמפקדים מידע מתוך נהלי ותוכניות ההכשרה של החיל וניתוח מידע אודות יכולות החניכים בפלוגות השונות. כוללת ממשק Web, שרת Backend ואינטגרציה ל-API של מודל AI, כשמסמכי המקור משמשים כבסיס הידע.',
+                    tags: ['Cloudflare Workers', 'AI API', 'JavaScript']
+                },
+                {
+                    title: 'משחק עם בינה מלאכותית',
+                    meta: 'פרויקט אישי',
+                    desc: 'פיתחתי את Hasami Shogi – משחק לוח אסטרטגי הכולל יריב ממוחשב מבוסס אלגוריתם Monte Carlo ועיצוב לוח ריאליסטי.',
+                    tags: ['Java', 'Monte Carlo']
+                },
+                {
+                    title: 'אפליקציית כושר',
+                    meta: 'פרויקט גמר בתיכון',
+                    desc: 'אפליקציית Android למעקב אחר אימונים, עם שמירת נתוני משתמשים ומעקב אחר יעדים.',
+                    tags: ['Android Studio', 'Firebase']
+                },
+                {
+                    title: 'טכנאי רשתות – מחלקת מחשוב ותשתיות, בהל״ג',
+                    meta: 'כשנתיים וחצי',
+                    desc: 'ניהול ותחזוקת תשתיות התקשורת בבסיס: הגדרת מתגים, עבודה עם סיבים אופטיים וארונות תקשורת, איתור ופתרון תקלות ומתן מענה טכנולוגי שוטף לעמדות המחשוב ביחידה.',
+                    tags: ['Networking', 'Switches', 'Fiber Optics']
+                }
+            ],
+            education_t: 'השכלה',
+            education: [
+                'תעודת בגרות מלאה עם 10 יחידות לימוד במדעי המחשב, 5 יחידות מתמטיקה, 5 יחידות אנגלית ו-5 יחידות כימיה',
+                'לימודי כיתה י״ג בהנדסת תוכנה – דיפלומת טכנאי תוכנה',
+                'קורס טכנאי רשתות בצה״ל',
+                'למידה עצמאית בתחום פיתוח Web, עבודה מול APIs ושילוב מודלי AI במערכות'
+            ],
+            skills_t: 'כישורים ומיומנויות',
+            skills: [
+                ['הובלת פרויקטים מקצה לקצה', 'מזהה צורך, מאפיין אותו מול גורמי פיקוד ומקצוע, מפתח את הפתרון ומלווה את ההטמעה והתמיכה במשתמשים.'],
+                ['יכולת למידה עצמאית ומהירה', 'לומד טכנולוגיות, שפות ומערכות חדשות באופן עצמאי ומיישם אותן בפרויקטים אמיתיים בזמן קצר.'],
+                ['יוזמה וראש גדול', 'מזהה פערים ומפתח פתרונות טכנולוגיים מעבר לנדרש בתפקיד.'],
+                ['אחריות וניהול זמן', 'עומד בלוחות זמנים ומשלב תפקיד שוטף בתחום התשתיות לצד פיתוח מערכות.'],
+                ['עבודה בצוות והדרכה', 'משתף פעולה, מתקשר בצורה ברורה ויודע להדריך משתמשים ועמיתים בתהליכים טכנולוגיים.']
+            ],
+            technologies_t: 'יכולות',
+            contact_t: 'צור קשר'
+        };
 
-    <hr>
+        const english = {
+            id: 'english',
+            name: 'Yarin Shitrit',
+            role: 'Web & Systems Developer · Network Technician',
+            docTitle: 'Yarin Shitrit - Resume',
+            lang_t: 'ENG',
+            pdf_t: 'Download PDF',
+            about_t: 'About Me',
+            about_b: [
+                'My name is Yarin Shitrit, born in 2005, from Rishon LeZion.',
+                'I serve as a Network Technician in the IT & Infrastructure department of the "Bahalag" base. Alongside my role, I initiated and developed systems for the brigade.',
+                'Experienced in leading projects end to end – from defining requirements with commanders and professionals, through development, to deployment and ongoing maintenance. A fast, independent learner, responsible and team-oriented.'
+            ],
+            experience_t: 'Work Experience',
+            jobs: [
+                {
+                    title: '"Pakadex" – Unit Orders Management System',
+                    award: '🏆 Brigade Commander\'s Award',
+                    desc: 'Independently initiated, specified and built a web system used daily across the brigade and its subordinate battalions. It manages the equipment and weekly schedule of the unit\'s departments, with real-time multi-user sync, a draft-and-publish workflow, user and permission management, and automatic login via organizational identity.',
+                    tags: ['JavaScript', 'HTML', 'CSS', 'SharePoint', 'REST API']
+                },
+                {
+                    title: '"Hir Gvulot" AI Chat',
+                    desc: 'A chat system that gives soldiers and commanders access to information from the corps\' training procedures and programs, and analyzes data on trainees\' performance across the different companies. Includes a web interface, a backend and integration with an AI model API, with the source documents serving as its knowledge base.',
+                    tags: ['Cloudflare Workers', 'AI API', 'JavaScript']
+                },
+                {
+                    title: 'AI-based Game',
+                    meta: 'Personal project',
+                    desc: 'Developed Hasami Shogi – a strategic board game with a computer opponent based on the Monte Carlo algorithm and a realistic board design.',
+                    tags: ['Java', 'Monte Carlo']
+                },
+                {
+                    title: 'Fitness App',
+                    meta: 'High school final project',
+                    desc: 'An Android app for tracking workouts, storing user data and tracking goals.',
+                    tags: ['Android Studio', 'Firebase']
+                },
+                {
+                    title: 'Network Technician – IT & Infrastructure Department',
+                    meta: 'About two and a half years',
+                    desc: 'Managing and maintaining the base\'s network infrastructure: configuring switches, working with fiber optics and communication cabinets, troubleshooting, and providing ongoing technical support to the unit\'s workstations.',
+                    tags: ['Networking', 'Switches', 'Fiber Optics']
+                }
+            ],
+            education_t: 'Education',
+            education: [
+                'Full matriculation with 10 units in Computer Science, 5 units in Mathematics, 5 units in English and 5 units in Chemistry',
+                '13th grade studies in Software Engineering – Software Technician Diploma',
+                'IDF Network Technician course',
+                'Self-taught Web development, API integration and AI model integration'
+            ],
+            skills_t: 'Personal Skills & Competencies',
+            skills: [
+                ['End-to-End Project Ownership', 'Identifies a need, defines requirements with commanders and stakeholders, builds the solution and supports deployment and users.'],
+                ['Fast and Independent Learner', 'Learns new technologies, languages and systems independently and applies them in real projects quickly.'],
+                ['Initiative', 'Spots gaps and builds technological solutions beyond the scope of the role.'],
+                ['Responsibility & Time Management', 'Meets deadlines while running an infrastructure role in parallel with system development.'],
+                ['Teamwork & Mentoring', 'Collaborates well, communicates clearly and guides users and colleagues through technical processes.']
+            ],
+            technologies_t: 'Technical Skills',
+            contact_t: 'Contact'
+        };
 
-    <!-- Skills -->
-    <div id="skills">
-        <h2></h2>
-        <ul></ul>
-    </div>
+        // RENDERING
+        const $ = (sel) => document.querySelector(sel);
 
-    <hr>
+        function escapeHTML(str) {
+            return str.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        }
 
-    <!-- Technologies -->
-    <div id="technologies">
-        <h2></h2>
-        <ul></ul>
-    </div>
+        // In Hebrew text, isolate each Latin run (e.g. "JavaScript", "API", "Monte Carlo")
+        // so neighbouring punctuation and Hebrew prefixes don't get reordered by the bidi algorithm.
+        function text(str, language) {
+            const safe = escapeHTML(str);
+            if (language.id !== 'hebrew') return safe;
+            return safe.replace(/[A-Za-z][A-Za-z0-9#+.&;]*(?:[ \/][A-Za-z0-9#+&;]+)*/g, '<bdi>$&</bdi>');
+        }
 
-    <hr>
+        function renderJob(job, language) {
+            const award = job.award ? `<span class="award">${escapeHTML(job.award)}</span>` : '';
+            const meta = job.meta ? `<p class="job-meta">${text(job.meta, language)}</p>` : '';
+            const tags = job.tags.map((t) => `<span class="tag">${escapeHTML(t)}</span>`).join('');
+            return `<article class="job">
+                <div class="job-head"><h3 class="job-title">${text(job.title, language)}</h3>${award}</div>
+                ${meta}
+                <p class="job-desc">${text(job.desc, language)}</p>
+                <div class="tags">${tags}</div>
+            </article>`;
+        }
 
+        let currentLanguage = hebrew;
 
-    <!-- Contact -->
-    <div id="contact">
-        <h2></h2>
-        <div><a class="contact-item" href="https://github.com/yarinshitritt" target="_blank">
-          <img src="Octicons-mark-github.svg.png" alt="GitHub" width="40" title="GitHub Profile">
-          <span>github.com/yarinshitritt</span>
-        </a>
-        <a class="contact-item" href="mailto:yarinshitrit908@gmail.com">
-          <img src="pngimg.com - gmail_logo_PNG12.png" alt="Gmail" width="45" title="yarinshitrit908@gmail.com">
-          <span>yarinshitrit908@gmail.com</span>
-        </a></div>
-    </div>
+        function fillHTML(language) {
+            document.documentElement.lang = language.id === 'hebrew' ? 'he' : 'en';
+            document.title = language.docTitle;
+            body.classList.remove('hebrew', 'english');
+            body.classList.add(language.id);
+
+            $('#name').textContent = language.name;
+            $('#role').innerHTML = text(language.role, language);
+            $('#langButton').textContent = language.lang_t;
+            $('#pdfButton').title = language.pdf_t;
+            $('#pdfButton').setAttribute('aria-label', language.pdf_t);
+
+            $('#about h2').textContent = language.about_t;
+            $('#about p').innerHTML = language.about_b.map((p) => text(p, language)).join('<br>');
+
+            $('#experience h2').textContent = language.experience_t;
+            $('#experience .jobs').innerHTML = language.jobs.map((j) => renderJob(j, language)).join('');
+
+            $('#education h2').textContent = language.education_t;
+            $('#education ul').innerHTML = language.education.map((e) => `<li>${text(e, language)}</li>`).join('');
+
+            $('#skills h2').textContent = language.skills_t;
+            $('#skills ul').innerHTML = language.skills
+                .map(([title, desc]) => `<li><strong>${escapeHTML(title)}</strong><span>${text(desc, language)}</span></li>`)
+                .join('');
+
+            $('#technologies h2').textContent = language.technologies_t;
+            $('#technologies ul').innerHTML = TECH.map((t) => `<li>${escapeHTML(t)}</li>`).join('');
+
+            $('#contact h2').textContent = language.contact_t;
+
+            currentLanguage = language;
+        }
+
+        const body = document.body;
+        const KEY = 'language';
+
+        function saveLanguage(langId) {
+            try { localStorage.setItem(KEY, langId); } catch (e) {}
+        }
+
+        function loadLanguage() {
+            try { return localStorage.getItem(KEY); } catch (e) { return null; }
+        }
+
+        function toggleLanguage() {
+            const next = currentLanguage.id === 'hebrew' ? english : hebrew;
+            fillHTML(next);
+            saveLanguage(next.id);
+        }
+
+        (function init() {
+            fillHTML(loadLanguage() === 'english' ? english : hebrew);
+            $('#langButton').addEventListener('click', toggleLanguage);
+            $('#pdfButton').addEventListener('click', () => window.print());
+        })();
+    </script>
 </body>
 </html>
