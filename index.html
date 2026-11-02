@@ -203,6 +203,16 @@
 
         .job-desc { margin: 0 0 var(--sp-3); }
 
+        .job-link {
+            display: inline-block;
+            margin-top: var(--sp-2);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--blue-mid);
+            text-decoration: none;
+        }
+        .job-link:hover { text-decoration: underline; }
+
         .award {
             display: inline-flex;
             align-items: center;
@@ -526,7 +536,16 @@
             return safe.replace(/[A-Za-z][A-Za-z0-9#+.&;]*(?:[ \/][A-Za-z0-9#+&;]+)*/g, '<bdi>$&</bdi>');
         }
 
-        function renderJob(job, language) {
+        // קישורי GitHub לפרויקטים (לפי מיקום הפרויקט ברשימת ה-jobs; 0 = פקאדקס, 1 = צ'אט, 3 = אפליקציית כושר).
+        const PROJECT_LINKS = {
+            1: 'https://github.com/yarinshitritt/hir-gvulot-chat',
+            3: 'https://github.com/yarinshitritt/WinGym'
+        };
+
+        function renderJob(job, language, index) {
+            const projectLink = PROJECT_LINKS[index]
+                ? `<a class="job-link" href="${PROJECT_LINKS[index]}" target="_blank" rel="noopener">${language.id === 'hebrew' ? 'לקוד ב-GitHub ↗' : 'View on GitHub ↗'}</a>`
+                : '';
             const award = job.award ? `<span class="award">${escapeHTML(job.award)}</span>` : '';
             const meta = job.meta ? `<p class="job-meta">${text(job.meta, language)}</p>` : '';
             const tags = job.tags.map((t) => `<span class="tag">${escapeHTML(t)}</span>`).join('');
@@ -535,6 +554,7 @@
                 ${meta}
                 <p class="job-desc">${text(job.desc, language)}</p>
                 <div class="tags">${tags}</div>
+                ${projectLink}
             </article>`;
         }
 
@@ -556,7 +576,7 @@
             $('#about p').innerHTML = language.about_b.map((p) => text(p, language)).join('<br>');
 
             $('#experience h2').textContent = language.experience_t;
-            $('#experience .jobs').innerHTML = language.jobs.map((j) => renderJob(j, language)).join('');
+            $('#experience .jobs').innerHTML = language.jobs.map((j, i) => renderJob(j, language, i)).join('');
 
             $('#education h2').textContent = language.education_t;
             $('#education ul').innerHTML = language.education.map((e) => `<li>${text(e, language)}</li>`).join('');
