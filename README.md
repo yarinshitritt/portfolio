@@ -1,18 +1,17 @@
 # Yarin Shitrit – Résumé / Portfolio
 
-A bilingual (Hebrew / English) one-page résumé website with a print-to-PDF button.
+A bilingual (Hebrew / English) one-page résumé website.
 
 **Live:** https://yarinshitritt.github.io/portfolio/
 
 ## Highlights
 
 - **Two languages, one page** – a button switches the whole page between Hebrew (RTL) and English (LTR); text, direction and layout update together.
-- **Print / PDF** – a dedicated button prints a clean résumé layout (print styles, page-break handling).
 - **Responsive** – works on desktop and mobile.
 - **Content-driven** – all résumé text lives in one data structure in `script.js`; the page is rendered from it, so adding a project or a skill is a one-line change.
 - **No frameworks, no build step** – plain HTML, CSS and JavaScript, hosted on GitHub Pages.
 
-## Featured projects
+## Projects
 
 | Project | Stack | Link |
 | --- | --- | --- |
