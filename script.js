@@ -3,6 +3,7 @@
 const langButton = document.querySelector('#langButton');
 const langButtonText = document.querySelector('#langButton>span');
 const nameTag = document.querySelector('#name');
+const pdfButton = document.querySelector('#pdfButton');
 // main
 const body = document.querySelector('body');
 const title = document.querySelector('#title>h1');
@@ -30,16 +31,17 @@ const hebrew = {
     name:'ירין שטרית',
     title: 'קורות חיים',
     lang_t:'עבר',
+    pdf_t:'הורדה כ-PDF',
     aboutme_t:'על עצמי',
-    aboutme_b:` שמי ירין שטרית, בן 21 מראשון לציון.<br> אני משרת כטכנאי רשת בבסיס סיירים, שם אני אחראי על תחזוקה ותפעול תשתיות הרשת בבסיס. בנוסף, אני מפתח אפליקציות ואתרים עבור צרכי היחידה.<br> בעל יכולת ללמידה עצמאית, עם ניסיון בפיתוח אפליקציות ואתרים במגוון טכנולוגיות. אני אדם חברותי, עם יכולת עבודה בצוות ויצירת קשרים בין-אישיים.`,
+    aboutme_b:`שמי ירין שטרית, יליד 2005, מראשון לציון.<br>משרת כטכנאי רשתות במחלקת מחשוב ותשתיות בבהל״ג, ובמקביל לתפקידי יזמתי ופיתחתי מערכות עבור החטיבה.<br>בעל ניסיון בהובלת פרויקט מקצה לקצה – מאפיון הצורך מול גורמי פיקוד ומקצוע ועד ליישום ולתחזוקה שוטפת. לומד מהר ובאופן עצמאי, אחראי ובעל יכולת עבודה בצוות.`,
     education_t:'השכלה',
-    education_b:`<li>תעודת בגרות מלאה עם 10 יחידות לימוד במדעי המחשב , 5 יחידות מתמטיקה, 5 יחידות אנגלית ו-5 יחידות כימיה</li><li>לימודי כיתה י״ג בהנדסת תוכנה, דיפלומת טכנאי תוכנה</li><li>השלמת קורס טכנאי רשת בצבא ושירות בתפקיד בתחום זה</li><li>פיתחתי במסגרת השירות הצבאי לצד תפקידי כטכנאי רשת</li>`,
+    education_b:`<li>תעודת בגרות מלאה עם 10 יחידות לימוד במדעי המחשב, 5 יחידות מתמטיקה, 5 יחידות אנגלית ו-5 יחידות כימיה</li><li>לימודי כיתה י״ג בהנדסת תוכנה – דיפלומת טכנאי תוכנה</li><li>קורס טכנאי רשתות בצה״ל</li><li>למידה עצמאית בתחום פיתוח Web, עבודה מול APIs ושילוב מודלי AI במערכות</li>`,
     experience_t:'ניסיון תעסוקתי',
-    experience_b:`<li><strong>אפליקציית כושר</strong> – פרויקט בתיכון: פיתחתי אפליקציה למעקב אחר אימונים ב-Android Studio עם אינטגרציה ל-Firebase לצורך שמירת נתוני משתמשים ותמיכה בהשגת יעדים.</li><li><strong>משחק עם בינה מלאכותית</strong> – פרויקט ב-Java: פיתחתי את Hasami Shogi, משחק לוח אסטרטגי, הכולל יריב מבוסס בינה מלאכותית באמצעות אלגוריתם מונטה קרלו ועיצוב לוח ריאליסטי.</li><li><strong>פרויקט ב-Java</strong> – בניתי מערכת צ'אט בזמן אמת הכוללת שרת ושני לקוחות, המאפשרת תקשורת מיידית.</li><li><strong>פרויקט ב-Python</strong> – פיתחתי בוט ל-Web Scraping באמצעות Selenium ו-BeautifulSoup לניטור נתונים מאתרים.</li><li><strong>טכנאי רשת</strong> – ניהלתי מתגים, סיבים אופטיים וארונות תקשורת. הגדרתי מתגים ותחזקתי את תשתית הרשת בכל הבסיס.</li>`,
+    experience_b:`<li><strong>״פקאדקס״ – מערכת לניהול פקא״ות יחידתיות</strong> – יזמתי, אפיינתי ופיתחתי באופן עצמאי מערכת Web שנמצאת בשימוש יומיומי בחטיבה ובגדודים הכפופים לה. המערכת מנהלת את הציוד והלו״ז השבועי של מדורי היחידה וכוללת סנכרון בזמן אמת בין משתמשים, תהליך טיוטה והפצה, ניהול משתמשים והרשאות והתחברות אוטומטית מבוססת זהות ארגונית. נבנתה ב-JavaScript, HTML ו-CSS ושומרת את המידע ב-SharePoint. <strong>זכיתי בהצטיינות מח״ט על פיתוח המערכת.</strong></li><li><strong>צ'אט AI להכשרות חיל הגנת הגבולות</strong> – מערכת צ'אט שמנגישה ללוחמים ולמפקדים מידע מתוך נהלי ותוכניות ההכשרה של החיל וניתוח מידע אודות יכולות החניכים בפלוגות השונות. כוללת ממשק Web, שרת Backend על Cloudflare Workers ואינטגרציה ל-API של מודל AI, כשמסמכי המקור משמשים כבסיס הידע.</li><li><strong>משחק עם בינה מלאכותית</strong> – פרויקט ב-Java: פיתחתי את Hasami Shogi, משחק לוח אסטרטגי הכולל יריב ממוחשב מבוסס אלגוריתם Monte Carlo ועיצוב לוח ריאליסטי.</li><li><strong>אפליקציית כושר</strong> – פרויקט גמר בתיכון: פיתחתי ב-Android Studio אפליקציה למעקב אחר אימונים, עם אינטגרציה ל-Firebase לשמירת נתוני משתמשים ומעקב אחר יעדים.</li><li><strong>טכנאי רשתות – מחלקת מחשוב ותשתיות, בהל״ג</strong> – כשנתיים וחצי של ניהול ותחזוקת תשתיות התקשורת בבסיס: הגדרת מתגים, עבודה עם סיבים אופטיים וארונות תקשורת, איתור ופתרון תקלות ומתן מענה טכנולוגי שוטף לעמדות המחשוב ביחידה.</li>`,
     skills_t:'כישורים ומיומנויות',
-    skills_b:`<li><strong>יכולת למידה עצמאית ומהירה</strong> – יכול ללמוד טכנולוגיות, שפות תכנות או מערכות חדשות באופן עצמאי וליישם אותן בפרויקטים בזמן קצר.</li><li><strong>כושר עבודה בצוות ותקשורת בין-אישית</strong> – יודע לשתף פעולה עם אחרים, לתקשר בצורה ברורה ולהשיג מטרות משותפות תוך שיתוף פעולה.</li><li><strong>אחריות גבוהה וניהול זמן יעיל</strong> – מתמיד במשימות, עומד בלוחות זמנים ומסוגל לנהל מספר משימות במקביל בצורה מסודרת.</li><li><strong>עמידה בלחצים וקבלת החלטות תחת לחץ</strong> – שומר על רוגע במצבי לחץ, מקבל החלטות מושכלות במהירות ושומר על איכות העבודה.</li><li><strong>כישורי הדרכה והנחיה</strong> – יכול להסביר רעיונות מורכבים לאחרים, להנחות משתמשים או עמיתים בתהליכים מקצועיים.</li>`,
+    skills_b:`<li><strong>הובלת פרויקטים מקצה לקצה</strong> – מזהה צורך, מאפיין אותו מול גורמי פיקוד ומקצוע, מפתח את הפתרון ומלווה את ההטמעה והתמיכה במשתמשים.</li><li><strong>יכולת למידה עצמאית ומהירה</strong> – לומד טכנולוגיות, שפות ומערכות חדשות באופן עצמאי ומיישם אותן בפרויקטים אמיתיים בזמן קצר.</li><li><strong>יוזמה </strong> – מזהה פערים ומפתח פתרונות טכנולוגיים מעבר לנדרש בתפקיד.</li><li><strong>אחריות וניהול זמן</strong> – עומד בלוחות זמנים ומשלב תפקיד שוטף בתחום התשתיות לצד פיתוח מערכות.</li><li><strong>עבודה בצוות והדרכה</strong> – משתף פעולה, מתקשר בצורה ברורה ויודע להדריך משתמשים ועמיתים בתהליכים טכנולוגיים.</li>`,
     technologies_t:'יכולות',
-    technologies_b:`<li>HTML</li><li>JavaScript</li><li>CSS</li><li>C</li><li>Assembly</li><li>SQL</li><li>C#</li><li>Java</li><li>Python</li><li>Android Studio</li><li>XML</li><li>Network Protocols</li>`,
+    technologies_b:`<li>JavaScript</li><li>HTML</li><li>CSS</li><li>Python</li><li>Java</li><li>C#</li><li>C</li><li>SQL</li><li>REST APIs</li><li>Cloudflare Workers</li><li>AI Chatbot Development</li><li>SharePoint</li><li>Git &amp; GitHub</li><li>Android Studio</li><li>Firebase</li><li>Networking (TCP/IP)</li>`,
     contact_t:'צור קשר'
 };
 const english = {
@@ -47,16 +49,17 @@ const english = {
     name:'Yarin Shitrit',
     title:'Resume',
     lang_t:'ENG',
+    pdf_t:'Download PDF',
     aboutme_t:'About Me',
-    aboutme_b:`My name is Yarin Shitrit, 21 years old, from Rishon Lezion.<br>I serve as a Network Technician at the 'Sayarim' base, responsible for maintaining and operating the network infrastructure. Additionally, I develop applications and websites for unit needs.<br>I am a fast learner with experience in developing apps and websites across multiple technologies. I am friendly, team-oriented, and skilled in interpersonal communication.`,
+    aboutme_b:`My name is Yarin Shitrit, born in 2005, from Rishon LeZion.<br>I serve as a Network Technician in the IT & Infrastructure department of the "Bahalag" base. Alongside my role, I initiated and developed systems for the brigade.<br>Experienced in leading projects end to end – from defining requirements with commanders and professionals, through development, to deployment and ongoing maintenance. A fast, independent learner, responsible and team-oriented.`,
     education_t:'Education',
-    education_b:`<li>High school diploma with 10 units in Computer Science, 5 units in English, and 5 units in Chemistry</li><li>13th grade studies in Software Engineering, Software Technician Diploma</li><li>Completed Network Technician course in the army and served in this role</li><li>Developed applications and websites as part of military service alongside network technician duties</li>`,
+    education_b:`<li>Full matriculation with 10 units in Computer Science, 5 units in Mathematics, 5 units in English and 5 units in Chemistry</li><li>13th grade studies in Software Engineering – Software Technician Diploma</li><li>IDF Network Technician course</li><li>Self-taught Web development, API integration and AI model integration</li>`,
     experience_t:'Work Experience',
-    experience_b:`<li><strong>Fitness App</strong> – High school project: Developed an Android Studio app for tracking workouts with Firebase integration to store user data and support goal achievement.</li><li><strong>AI-based Game</strong> – Java project: Developed Hasami Shogi, a strategic board game including an AI opponent using Monte Carlo algorithm and realistic board design.</li><li><strong>Java Project</strong> – Built a real-time chat system including a server and two clients enabling immediate communication.</li><li><strong>Python Project</strong> – Developed a Web Scraping bot using Selenium and BeautifulSoup to monitor data from websites.</li><li><strong>Network Technician</strong> – Managed switches, fiber optics, and communication cabinets; configured switches and maintained the base network infrastructure.</li>`,
+    experience_b:`<li><strong>"Pakadex" – Unit Orders Management System</strong> – Independently initiated, specified and built a web system used daily across the brigade and its subordinate battalions. It manages the equipment and weekly schedule of the unit's departments, with real-time multi-user sync, a draft-and-publish workflow, user and permission management, and automatic login via organizational identity. Built with JavaScript, HTML and CSS, with data stored in SharePoint. <strong>Received the Brigade Commander's Award of Excellence for developing the system.</strong></li><li><strong>"Hir Gvulot" AI Chat</strong> – A chat system that gives soldiers and commanders access to information from the corps' training procedures and programs, and analyzes data on trainees' performance across the different companies. Includes a web interface, a backend on Cloudflare Workers and integration with an AI model API, with the source documents serving as its knowledge base.</li><li><strong>AI-based Game</strong> – Java project: Developed Hasami Shogi, a strategic board game with a computer opponent based on the Monte Carlo algorithm and a realistic board design.</li><li><strong>Fitness App</strong> – High school final project: Developed an Android Studio app for tracking workouts, with Firebase integration for storing user data and tracking goals.</li><li><strong>Network Technician – IT & Infrastructure Department</strong> – About two and a half years managing and maintaining the base's network infrastructure: configuring switches, working with fiber optics and communication cabinets, troubleshooting, and providing ongoing technical support to the unit's workstations.</li>`,
     skills_t:'Personal Skills & Competencies',
-    skills_b:`<li><strong>Fast and Independent Learner</strong> – Able to learn new technologies, programming languages, or systems independently and implement them quickly in projects.</li><li><strong>Teamwork & Interpersonal Communication</strong> – Collaborates effectively, communicates clearly, and achieves common goals with others.<li><strong>High Responsibility & Time Management</strong> – Completes tasks on time, manages multiple tasks simultaneously, and maintains order and structure.</li><li><strong>Stress Management & Decision Making</strong> – Stays calm under pressure, makes informed decisions quickly, and maintains work quality.<li><strong>Coaching & Mentoring</strong> – Able to explain complex ideas to others and guide users or colleagues through technical processes.</li>`,
+    skills_b:`<li><strong>End-to-End Project Ownership</strong> – Identifies a need, defines requirements with commanders and stakeholders, builds the solution and supports deployment and users.</li><li><strong>Fast and Independent Learner</strong> – Learns new technologies, languages and systems independently and applies them in real projects quickly.</li><li><strong>Initiative</strong> – Spots gaps and builds technological solutions beyond the scope of the role.</li><li><strong>Responsibility & Time Management</strong> – Meets deadlines while running an infrastructure role in parallel with system development.</li><li><strong>Teamwork & Mentoring</strong> – Collaborates well, communicates clearly and guides users and colleagues through technical processes.</li>`,
     technologies_t:'Technical Skills',
-    technologies_b:`<li>HTML</li><li>JavaScript</li><li>CSS</li><li>C</li><li>Assembly</li><li>SQL</li><li>C#</li><li>Java</li><li>Python</li><li>Android Studio</li><li>XML</li><li>Network Protocols</li>`,
+    technologies_b:`<li>JavaScript</li><li>HTML</li><li>CSS</li><li>Python</li><li>Java</li><li>C#</li><li>C</li><li>SQL</li><li>REST APIs</li><li>Cloudflare Workers</li><li>AI Chatbot Development</li><li>SharePoint</li><li>Git &amp; GitHub</li><li>Android Studio</li><li>Firebase</li><li>Networking (TCP/IP)</li>`,
     contact_t:'Contact'
 };
 let currentLanguage = english;
@@ -65,6 +68,9 @@ function fillHTML(language){
     title.innerText = language.title;
     nameTag.innerText = language.name;
     langButtonText.innerText = language.lang_t;
+    pdfButton.title = language.pdf_t;
+    pdfButton.setAttribute('aria-label', language.pdf_t);
+    document.title = language.id === 'hebrew' ? 'ירין שטרית - קורות חיים' : 'Yarin Shitrit - Resume';
     aboutTitle.innerText = language.aboutme_t;
     aboutBody.innerHTML = language.aboutme_b;
     educationTitle.innerText = language.education_t;
@@ -110,5 +116,6 @@ function loadLanguage() {
     const startLanguage = saved === 'english' ? english : hebrew;
     fillHTML(startLanguage);
     langButton.addEventListener('click', toggleLanguage);
+    pdfButton.addEventListener('click', () => window.print());
 })();
 

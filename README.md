@@ -7,6 +7,7 @@ A bilingual (Hebrew / English) one-page résumé website.
 ## Highlights
 
 - **Two languages, one page** – a button switches the whole page between Hebrew (RTL) and English (LTR); text, direction and layout update together.
+- **Print / PDF** – a button prints a clean résumé layout (print styles, page-break handling).
 - **Responsive** – works on desktop and mobile.
 - **Content-driven** – all résumé text lives in one data structure in `script.js`; the page is rendered from it, so adding a project or a skill is a one-line change.
 - **No frameworks, no build step** – plain HTML, CSS and JavaScript, hosted on GitHub Pages.

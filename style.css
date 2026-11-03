@@ -105,7 +105,7 @@ body > hr {
 }
 
 header {
-    /* שלוש עמודות: צד, כפתור שפה במרכז בדיוק, צד - כך שהכפתור לא זז כשרוחב השם/הטלפון משתנה בין השפות */
+    /* שלוש עמודות: שם, כפתור שפה במרכז בדיוק, טלפון+PDF - כך שהכפתור לא זז כשרוחב השם/הטלפון משתנה בין השפות */
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
@@ -126,20 +126,20 @@ header {
     white-space: nowrap;
 }
 
-#name { justify-self: start; }
-
 #phone {
-    justify-self: end;
     font-size: 1.1rem;
     color: rgba(255,255,255,0.85);
     white-space: nowrap;
 }
 
+#name { grid-column: 1; justify-self: start; }
+
 #langButton {
+    grid-column: 2;
+    justify-content: center;
+    min-width: 4rem; /* רוחב קבוע - הכפתור לא משנה גודל כשהטקסט מתחלף */
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 4rem; /* רוחב קבוע - הכפתור לא משנה גודל כשהטקסט מתחלף בין עברית לאנגלית */
     gap: var(--sp-2);
     cursor: pointer;
     background: rgba(255,255,255,0.12);
@@ -389,10 +389,119 @@ body.hebrew #title {
 }
 
 @media (max-width: 480px) {
-    #name  { font-size: 1rem; }
-    #phone { font-size: 0.85rem; }
-    #langButton { min-width: 3.4rem; padding: 0.3rem 0.5rem; }
+    header { padding-left: 0.75rem; padding-right: 0.75rem; }
+    #name  { font-size: 0.95rem; }
+    #phone { font-size: 0.74rem; }
+    #langButton { min-width: 3.2rem; padding: 0.3rem 0.4rem; }
+    #headerActions { gap: 0.25rem; }
     #technologies ul {
         grid-template-columns: 1fr 1fr;
     }
+}
+/* Header actions (phone + PDF) */
+#headerActions {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+    direction: ltr;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+#pdfButton {
+    cursor: pointer;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-md);
+    padding: 0.2rem 0.45rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: background 0.2s;
+}
+#pdfButton:hover {
+    background: rgba(255,255,255,0.22);
+}
+
+/* Contact items: icon + visible text */
+#contact > div {
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+}
+
+#contact .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: #212529;
+    font-weight: 500;
+    direction: ltr;
+}
+#contact .contact-item:hover {
+    color: var(--blue-mid);
+    text-decoration: none;
+}
+
+/* Print / PDF */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    body {
+        background: #fff;
+        font-size: 11pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    header {
+        position: static;
+        box-shadow: none;
+    }
+
+    #langButton,
+    #pdfButton,
+    #title,
+    hr {
+        display: none;
+    }
+
+    #about,
+    #education,
+    #experience,
+    #skills,
+    #technologies,
+    #contact {
+        box-shadow: none;
+        margin-bottom: var(--sp-3);
+    }
+
+    #education ul li,
+    #experience ul li,
+    #skills ul li,
+    #technologies ul li {
+        break-inside: avoid;
+    }
+
+    #about h2,
+    #education h2,
+    #experience h2,
+    #skills h2,
+    #technologies h2,
+    #contact h2 {
+        break-after: avoid;
+        padding-top: var(--sp-4);
+    }
+
+    #contact a img {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    #name  { font-size: 0.85rem; }
+    #phone { font-size: 0.66rem; }
+    #langButton { min-width: 2.8rem; font-size: 0.8rem; }
+    #pdfButton { padding: 0.15rem 0.3rem; font-size: 0.95rem; }
 }
